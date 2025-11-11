@@ -3,12 +3,13 @@ import MyProfile from './../pages/MyProfile';
 import MyContainer from './MyContainer';
 import { Link, NavLink } from 'react-router';
 import MyLink from './MyLink';
-import Register from './../pages/Register';
+
 
 const Navbar = () => {
     return (
-
-             <MyContainer className="navbar bg-[#15803D]">
+       <div className="sticky top-0 z-50 bg-[#15803D] shadow-md">
+        
+             <MyContainer className="navbar ">
   
          <div className="navbar-start">
     <div className="dropdown">
@@ -71,6 +72,7 @@ const Navbar = () => {
   </div>
     
 </MyContainer>
+       </div>
  
     );
 };
