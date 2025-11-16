@@ -3,7 +3,7 @@ import MyContainer from './../components/MyContainer';
 import { Link } from 'react-router';
 import { FaEye } from 'react-icons/fa';
 import { IoEyeOff } from 'react-icons/io5';
-import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
 import { auth } from './../firebase/firebase.config';
 import { toast } from 'react-toastify';
 import { GoogleAuthProvider } from 'firebase/auth';
@@ -18,8 +18,10 @@ const Register = () => {
         e.preventDefault();
 
         const email=e.target.email?.value;
+        const photoURL=e.target.photo?.value;
+        const displayName =e.target.name?.value;
         const password=e.target.password?.value;
-        console.log("signUp entered",{email,password})
+     
         const Regexp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
 
         if(!Regexp.test(password)){
@@ -29,8 +31,16 @@ const Register = () => {
 
         createUserWithEmailAndPassword(auth,email,password)
         .then((res)=>{
-          console.log(res);
-          toast.success("signup successfully")
+          updateProfile(res.user,{
+            displayName,
+            photoURL,
+          }).then((res)=>{
+            console.log(res);
+            toast.success("signup successfully");   
+          }).catch((e)=>{
+            toast.error(e.message);
+          })
+           
         }).catch(e=>{
           toast.error(e.message);
         })

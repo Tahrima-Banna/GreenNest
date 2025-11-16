@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import MyProfile from './../pages/MyProfile';
 import MyContainer from './MyContainer';
 import { Link, NavLink } from 'react-router';
 import MyLink from './MyLink';
+import { AuthContext } from './context/AuthContext';
 
 
 const Navbar = () => {
+
+  const result =useContext(AuthContext);
+
+   console.log(result)
     return (
        <div className="sticky top-0 z-50 bg-[#15803D] shadow-md">
         
