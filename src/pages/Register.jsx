@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import MyContainer from './../components/MyContainer';
 import { Link } from 'react-router';
 import { FaEye } from 'react-icons/fa';
 import { IoEyeOff } from 'react-icons/io5';
-import { createUserWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
+import {  signInWithPopup, updateProfile } from 'firebase/auth';
 import { auth } from './../firebase/firebase.config';
 import { toast } from 'react-toastify';
 import { GoogleAuthProvider } from 'firebase/auth';
+import { AuthContext } from '../components/context/AuthContext';
 
 const googleProvider= new GoogleAuthProvider();
 
 const Register = () => {
 
    const[show,setShow]=useState(false);
+    const{createUser}=useContext(AuthContext)
 
    const handleRegister=(e)=>{
         e.preventDefault();
@@ -29,7 +31,7 @@ const Register = () => {
           return;
         }
 
-        createUserWithEmailAndPassword(auth,email,password)
+        createUser(email,password)
         .then((res)=>{
           updateProfile(res.user,{
             displayName,

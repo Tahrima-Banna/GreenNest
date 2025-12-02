@@ -1,31 +1,36 @@
-import React, { useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import MyContainer from '../components/MyContainer';
 import { Link } from 'react-router';
 import { FaEye } from 'react-icons/fa';
 import { IoEyeOff } from 'react-icons/io5';
-import { signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
-import { auth } from '../firebase/firebase.config';
+
 import { toast } from 'react-toastify';
-import { GoogleAuthProvider } from 'firebase/auth';
+
+import { AuthContext } from '../components/context/AuthContext';
 
 
 
-const googleProvider= new GoogleAuthProvider();
+
 
 const Login = () => {
 
     // const [user,setUser]=useState({})
      const[show,setShow]=useState(false);
+     const{signInWithPandE,signInWithEmail,sendResetPassword,user,setUser}=useContext(AuthContext)
+
+    // const [email,setEmail]=useState(null)
+
+    const emailRef=useRef(null);
 
       const handlelogIn=(e)=>{
             e.preventDefault();
         const email=e.target.email?.value;
         const password=e.target.password?.value;
-        console.log("login entered",{email,password});
-        signInWithEmailAndPassword(auth,email,password)
+        //console.log("login entered",{email,password});
+        signInWithPandE(email,password)
         .then((res)=>{
           console.log(res);
-          //setUser(res.user)
+          setUser(res.user)
           toast.success("logIn successfully");
         }).catch(e=>{
            
@@ -34,9 +39,8 @@ const Login = () => {
         })
       }
 
-      
           const handleGoogleIn=()=>{
-            signInWithPopup(auth, googleProvider)
+          signInWithEmail()
             .then((res)=>{
                       console.log(res);
                       //setUser(res.user)
@@ -49,12 +53,19 @@ const Login = () => {
       
           }
 
-      const handlelogOut=()=>{
-         signOut(auth).then(()=>{
-          toast.success("logOut successfully")
-         }).catch((e)=>{
-           toast.error(e.message);
-         })
+   
+      const handlePassword=()=>{
+      
+       const email =emailRef.current.value;
+      sendResetPassword(email)
+       .then((res) => {
+    toast.success("Check your email to reset password");
+  })
+  .catch((e) => {
+
+      toast.error(e.message);
+  });
+
       }
     return (
         <MyContainer>
@@ -65,14 +76,16 @@ const Login = () => {
         
           {/* email */}
           <label className="label">Email</label>
-          <input type="email" name='email' className="input" placeholder="Email" />
+          <input type="email" name='email' ref={emailRef}
+           className="input"  placeholder="Email" />
           {/* password */}
           <div className='relative'>
             <label className="label">Password</label>
           <input type={show ? "text":"password"} name='password' className="input" placeholder="Password" />
           <span onClick={()=>setShow(!show)} className='absolute bottom-3 right-9 z-50 cursor-pointer'>{show? <FaEye/>:<IoEyeOff/>}</span>
           </div>
-          <div><a className="link link-hover">Forgot password?</a></div>
+          <div><button className="hover:underline cursor-pointer" 
+          onClick={handlePassword} type='button'>Forgot password?</button></div>
       
           <p className='font-semibold text-center pt-5'>Dont’t Have An Account ? <Link className='text-[#8a7676]' to='/register'>Register</Link></p>
           <button className="btn btn-neutral mt-4">Login</button>

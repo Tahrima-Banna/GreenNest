@@ -1,16 +1,27 @@
-import React, { useContext } from 'react';
+import React, { use} from 'react';
 import MyProfile from './../pages/MyProfile';
 import MyContainer from './MyContainer';
 import { Link, NavLink } from 'react-router';
 import MyLink from './MyLink';
 import { AuthContext } from './context/AuthContext';
+import { CgEnter } from 'react-icons/cg';
+import { toast } from 'react-toastify';
 
 
 const Navbar = () => {
 
-  const result =useContext(AuthContext);
+  const {user,signOutFnc,setUser} =use(AuthContext);
+   const handlelogOut=()=>{
+          signOutFnc().then(()=>{
+          toast.success("logOut successfully")
+             setUser(null);
+          }).catch((e)=>{
+            toast.error(e.message);
+          })
+      }
+        
 
-   console.log(result)
+  console.log(user)
     return (
        <div className="sticky top-0 z-50 bg-[#15803D] shadow-md">
         
@@ -40,40 +51,49 @@ const Navbar = () => {
   </div>
   <div className="navbar-end">
    
-  <div className="flex-none">
+  {/* If user is logged in */}
+{user ? (
+  <div className="dropdown dropdown-end">
+    <div
+      tabIndex={0}
+      role="button"
+      className="btn btn-ghost btn-circle avatar"
+    >
+      <div className="w-10 h-10 rounded-full">
+        <img
+          src={user.photoURL || "https://i.pravatar.cc/100"}
+          alt="user"
+        />
+      </div>
+    </div>
 
-  
-    
-
-  <button className="badge bg-[#fcfc15] border-0">  <Link className='text-[#15803D] font-semibold' to='/register'>Register</Link></button>
-  <button className="badge bg-[#fcfc15] border-0 ml-5">  <Link className='text-[#15803D] font-semibold' to='/login'>LogIn</Link></button>
-
-
-
-    
-  {/* <div className="dropdown dropdown-end">
-    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-    <div className="w-10 rounded-full">
-    {/* need to conditional rendering */}
-{/* <img
-  alt="Tailwind CSS Navbar component"
-  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-</div>
+    <ul
+      tabIndex="-1"
+      className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow"
+    >
+      <li>
+        <span className="justify-between">
+          {user.displayName || "User"}
+        </span>
+      </li>
+      <li>
+        <button onClick={handlelogOut}>Logout</button>
+      </li>
+    </ul>
   </div>
-  <ul
-    tabIndex="-1"
-    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-    <li>
-      <a className="justify-between">
-        Profile
-      
-      </a>
-    </li>
-  
-    <li><a>Logout</a></li>
-  </ul>
-</div> */} 
+) : (
+  // If user NOT logged in → show buttons
+  <div className="flex items-center">
+    <button className="badge bg-[#fcfc15] border-0">
+      <Link className='text-[#15803D] font-semibold' to='/register'>Register</Link>
+    </button>
+
+    <button className="badge bg-[#fcfc15] border-0 ml-5">
+      <Link className='text-[#15803D] font-semibold' to='/login'>LogIn</Link>
+    </button>
   </div>
+)}
+
   </div>
     
 </MyContainer>
