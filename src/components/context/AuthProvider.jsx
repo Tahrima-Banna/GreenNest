@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
 import { GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
@@ -10,16 +10,19 @@ const googleProvider= new GoogleAuthProvider();
 const AuthProvider = ({children}) => {
 
     const[user,setUser]=useState(null);
+    const[loading,setLoading]=useState(true);
 
     const createUser=(email,password)=>{
-
+        setLoading(true);
         return  createUserWithEmailAndPassword(auth,email,password)
     }
 
     const signInWithPandE=(email,password)=>{
+       setLoading(true);
         return  signInWithEmailAndPassword(auth,email,password)
     }
       const signInWithEmail=()=>{
+            setLoading(true);
         return  signInWithPopup(auth, googleProvider)
     }
 
@@ -31,9 +34,11 @@ const AuthProvider = ({children}) => {
       })
     }
       const signOutFnc=()=>{
+        setLoading(true);
         return  signOut(auth)
     }
       const sendResetPassword=(email)=>{
+        setLoading(true);
         return sendPasswordResetEmail(auth, email)
     }
 
@@ -46,9 +51,35 @@ const AuthProvider = ({children}) => {
         sendResetPassword,
          user,
         setUser,
-        updateProfileFunc
+        updateProfileFunc,
+        loading,
+        setLoading
     };
 
+    useEffect(()=>{
+     const unsubcribed= onAuthStateChanged(auth, (currUser)=>{
+  
+        console.log(currUser);
+        setUser(currUser);
+        setLoading(false);
+      });
+
+      return ()=>{
+        unsubcribed();
+      }
+      
+    },[])
+
+    onAuthStateChanged(auth, (currUser)=>{
+
+      console.log(currUser);
+      setUser(currUser);
+    });
+    onAuthStateChanged(auth, (currUser)=>{
+
+      console.log(currUser);
+      setUser(currUser);
+    });
     onAuthStateChanged(auth, (currUser)=>{
 
       console.log(currUser);

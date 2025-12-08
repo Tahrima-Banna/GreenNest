@@ -16,7 +16,7 @@ const Login = () => {
 
     // const [user,setUser]=useState({})
      const[show,setShow]=useState(false);
-     const{signInWithPandE,signInWithEmail,sendResetPassword,user,setUser}=useContext(AuthContext)
+     const{signInWithPandE,signInWithEmail,sendResetPassword,setLoading,setUser}=useContext(AuthContext)
 
     // const [email,setEmail]=useState(null)
 
@@ -29,6 +29,7 @@ const Login = () => {
         //console.log("login entered",{email,password});
         signInWithPandE(email,password)
         .then((res)=>{
+          setLoading(false);
           console.log(res);
           setUser(res.user)
           toast.success("logIn successfully");
@@ -43,6 +44,7 @@ const Login = () => {
           signInWithEmail()
             .then((res)=>{
                       console.log(res);
+                      setLoading(false);
                       //setUser(res.user)
                       toast.success("logIn successfully");
                     }).catch(e=>{
@@ -59,6 +61,7 @@ const Login = () => {
        const email =emailRef.current.value;
       sendResetPassword(email)
        .then((res) => {
+        setLoading(false);
     toast.success("Check your email to reset password");
   })
   .catch((e) => {

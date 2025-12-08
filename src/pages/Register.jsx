@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import MyContainer from './../components/MyContainer';
-import { Link } from 'react-router';
+import { Link, useNavigate} from 'react-router';
 import { FaEye } from 'react-icons/fa';
 import { IoEyeOff } from 'react-icons/io5';
-import {  signInWithPopup, updateProfile } from 'firebase/auth';
+import {  signInWithPopup} from 'firebase/auth';
 import { auth } from './../firebase/firebase.config';
 import { toast } from 'react-toastify';
 import { GoogleAuthProvider } from 'firebase/auth';
@@ -14,7 +14,9 @@ const googleProvider= new GoogleAuthProvider();
 const Register = () => {
 
    const[show,setShow]=useState(false);
-    const{createUser}=useContext(AuthContext)
+    const{createUser, setLoading,updateProfileFunc,signOutFnc,setUser}=useContext(AuthContext)
+
+    const navigate =useNavigate();
 
    const handleRegister=(e)=>{
         e.preventDefault();
@@ -32,14 +34,20 @@ const Register = () => {
         }
 
         createUser(email,password)
-        .then((res)=>{
-          updateProfile(res.user,{
+        .then(()=>{
+          updateProfileFunc(
             displayName,
-            photoURL,
-          }).then((res)=>{
+            photoURL).then((res)=>{
             console.log(res);
-            toast.success("signup successfully");   
-          }).catch((e)=>{
+            setLoading(true);
+            
+            signOutFnc().then(()=>{
+                    toast.success("signup successfully");
+                       setUser(null);
+                       navigate("/login");
+                    })   
+          })
+          .catch((e)=>{
             toast.error(e.message);
           })
            
@@ -53,6 +61,7 @@ const Register = () => {
       .then((res)=>{
                 console.log(res);
                 //setUser(res.user)
+                setLoading(false);
                 toast.success("logIn successfully");
               }).catch(e=>{
                  

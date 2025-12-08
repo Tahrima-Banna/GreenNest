@@ -6,11 +6,12 @@ import MyLink from './MyLink';
 import { AuthContext } from './context/AuthContext';
 import { CgEnter } from 'react-icons/cg';
 import { toast } from 'react-toastify';
+import { ClockLoader } from 'react-spinners';
 
 
 const Navbar = () => {
 
-  const {user,signOutFnc,setUser} =use(AuthContext);
+  const {user,signOutFnc,setUser,loading,setLoading} =use(AuthContext);
    const handlelogOut=()=>{
           signOutFnc().then(()=>{
           toast.success("logOut successfully")
@@ -21,7 +22,7 @@ const Navbar = () => {
       }
         
 
-  console.log(user)
+
     return (
        <div className="sticky top-0 z-50 bg-[#15803D] shadow-md">
         
@@ -37,7 +38,7 @@ const Navbar = () => {
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
        <li><NavLink to={"/"}>Home</NavLink></li>
       <li><NavLink  to={"/plants"}>Plants</NavLink></li>
-      <li><NavLink to={"/profile"}>MyProfile</NavLink></li>
+      {user &&(<li><NavLink to={"/profile"}>MyProfile</NavLink></li>)}
       </ul>
     </div>
     <a className="text-[#FFFFFF] font-bold text-2xl lg:text-4xl">GreenNest</a>
@@ -46,13 +47,13 @@ const Navbar = () => {
     <ul className="menu menu-horizontal px-1">
       <li><MyLink to={"/"} className="text-[#FFFFFF] font-bold">Home</MyLink></li>
       <li><MyLink to={"/plants"} className="text-[#FFFFFF] font-bold">Plants</MyLink></li>
-      <li><MyLink to={"/profile"} className="text-[#FFFFFF] font-bold">MyProfile</MyLink></li>
+      {user &&(<li><MyLink to={"/profile"} className="text-[#FFFFFF] font-bold">MyProfile</MyLink></li>)}
     </ul>
   </div>
   <div className="navbar-end">
    
   {/* If user is logged in */}
-{user ? (
+{loading? <ClockLoader color='#ffffff'/>:user ? (
   <div className="dropdown dropdown-end">
     <div
       tabIndex={0}
