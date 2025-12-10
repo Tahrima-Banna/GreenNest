@@ -59,7 +59,7 @@ const AuthProvider = ({children}) => {
     useEffect(()=>{
      const unsubcribed= onAuthStateChanged(auth, (currUser)=>{
   
-        console.log(currUser);
+    
         setUser(currUser);
         setLoading(false);
       });
@@ -72,17 +72,17 @@ const AuthProvider = ({children}) => {
 
     onAuthStateChanged(auth, (currUser)=>{
 
-      console.log(currUser);
+   
       setUser(currUser);
     });
     onAuthStateChanged(auth, (currUser)=>{
 
-      console.log(currUser);
+      
       setUser(currUser);
     });
     onAuthStateChanged(auth, (currUser)=>{
 
-      console.log(currUser);
+     
       setUser(currUser);
     });
     return <AuthContext value={authInfo}>{children}</AuthContext>

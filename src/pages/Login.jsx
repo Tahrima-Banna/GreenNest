@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from 'react';
 import MyContainer from '../components/MyContainer';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { FaEye } from 'react-icons/fa';
 import { IoEyeOff } from 'react-icons/io5';
 
@@ -16,9 +16,18 @@ const Login = () => {
 
     // const [user,setUser]=useState({})
      const[show,setShow]=useState(false);
-     const{signInWithPandE,signInWithEmail,sendResetPassword,setLoading,setUser}=useContext(AuthContext)
+     const{signInWithPandE,signInWithEmail,sendResetPassword,setLoading,setUser,user}=useContext(AuthContext)
 
     // const [email,setEmail]=useState(null)
+
+     const location =useLocation();
+     const from =location.state || "/";
+     const navigate =useNavigate();
+
+     if(user){
+     navigate("/");
+      return;
+     }
 
     const emailRef=useRef(null);
 
@@ -33,6 +42,7 @@ const Login = () => {
           console.log(res);
           setUser(res.user)
           toast.success("logIn successfully");
+          navigate(from);
         }).catch(e=>{
            
           console.log(e);
@@ -47,6 +57,7 @@ const Login = () => {
                       setLoading(false);
                       //setUser(res.user)
                       toast.success("logIn successfully");
+                      navigate(from);
                     }).catch(e=>{
                        
                       console.log(e);

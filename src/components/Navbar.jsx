@@ -38,7 +38,7 @@ const Navbar = () => {
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
        <li><NavLink to={"/"}>Home</NavLink></li>
       <li><NavLink  to={"/plants"}>Plants</NavLink></li>
-      {user &&(<li><NavLink to={"/profile"}>MyProfile</NavLink></li>)}
+       <li><NavLink to={"/profile"}>MyProfile</NavLink></li>
       </ul>
     </div>
     <a className="text-[#FFFFFF] font-bold text-2xl lg:text-4xl">GreenNest</a>
@@ -47,7 +47,7 @@ const Navbar = () => {
     <ul className="menu menu-horizontal px-1">
       <li><MyLink to={"/"} className="text-[#FFFFFF] font-bold">Home</MyLink></li>
       <li><MyLink to={"/plants"} className="text-[#FFFFFF] font-bold">Plants</MyLink></li>
-      {user &&(<li><MyLink to={"/profile"} className="text-[#FFFFFF] font-bold">MyProfile</MyLink></li>)}
+      <li><MyLink to={"/profile"} className="text-[#FFFFFF] font-bold">MyProfile</MyLink></li>
     </ul>
   </div>
   <div className="navbar-end">
