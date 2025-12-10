@@ -9,7 +9,6 @@ const PrivateRouter = ({children}) => {
 
     const location =useLocation();
 
-    console.log(location);
 
     if(loading){
      return(

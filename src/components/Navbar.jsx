@@ -26,7 +26,7 @@ const Navbar = () => {
     return (
        <div className="sticky top-0 z-50 bg-[#15803D] shadow-md">
         
-             <MyContainer className="navbar ">
+             <MyContainer className="navbar">
   
          <div className="navbar-start">
     <div className="dropdown">
@@ -41,7 +41,7 @@ const Navbar = () => {
        <li><NavLink to={"/profile"}>MyProfile</NavLink></li>
       </ul>
     </div>
-    <a className="text-[#FFFFFF] font-bold text-2xl lg:text-4xl">GreenNest</a>
+    <a className="text-[#FFFFFF] font-bold text-md md:text-xl lg:text-4xl">GreenNest</a>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -84,15 +84,20 @@ const Navbar = () => {
   </div>
 ) : (
   // If user NOT logged in → show buttons
-  <div className="flex items-center">
-    <button className="badge bg-[#fcfc15] border-0">
-      <Link className='text-[#15803D] font-semibold' to='/register'>Register</Link>
-    </button>
+  <div className="flex items-center gap-2 sm:gap-4">
+  <button className="badge bg-[#fcfc15] border-0 text-xs px-2 py-1 sm:text-sm sm:px-3 sm:py-1">
+    <Link className="text-[#15803D] font-semibold" to="/register">
+      Register
+    </Link>
+  </button>
 
-    <button className="badge bg-[#fcfc15] border-0 ml-5">
-      <Link className='text-[#15803D] font-semibold' to='/login'>LogIn</Link>
-    </button>
-  </div>
+  <button className="badge bg-[#fcfc15] border-0 text-xs px-2 py-1 sm:text-sm sm:px-3 sm:py-1">
+    <Link className="text-[#15803D] font-semibold" to="/login">
+      LogIn
+    </Link>
+  </button>
+</div>
+
 )}
 
   </div>

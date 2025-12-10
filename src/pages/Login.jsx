@@ -84,7 +84,7 @@ const Login = () => {
     return (
         <MyContainer>
             <div className='flex justify-center min-h-screen items-center'>
-         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl py-5">
+         <div className="card bg-base-100 mt-10 md:mt-1 mb-10 md:mb-1 shrink-0 shadow-2xl  py-5">
             <h1 className='font-semibold text-2xl text-center'>Login your account</h1>
       <form onSubmit={handlelogIn} className="card-body">
         
