@@ -24,7 +24,7 @@ const Navbar = () => {
 
 
     return (
-       <div className="sticky top-0 z-50 bg-[#15803D] shadow-md">
+       <div className="sticky top-0 z-50 bg-[#15803D] shadow-md ">
         
              <MyContainer className="navbar">
   
