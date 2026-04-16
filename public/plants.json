@@ -1,0 +1,74 @@
+[
+  {
+    "plantId": 1,
+    "plantName": "Snake Plant",
+    "category": "Air Purifier",
+    "price": 18,
+    "rating": 4.8,
+    "availableStock": 15,
+    "careLevel": "Easy",
+    "description": "A hardy plant that purifies indoor air and thrives in low light. Perfect for beginners.",
+    "image": "/images/snake_plant.png",
+    "providerName": "GreenNest Studio"
+  },
+  {
+    "plantId": 2,
+    "plantName": "Monstera Deliciosa",
+    "category": "Tropical Decor",
+    "price": 35,
+    "rating": 4.9,
+    "availableStock": 8,
+    "careLevel": "Moderate",
+    "description": "Famous for its heart-shaped leaves with unique holes. Adds a tropical feel to any room.",
+    "image": "/images/monstera.png",
+    "providerName": "Urban Jungle Co."
+  },
+  {
+    "plantId": 3,
+    "plantName": "Fiddle Leaf Fig",
+    "category": "Statement Tree",
+    "price": 55,
+    "rating": 4.7,
+    "availableStock": 5,
+    "careLevel": "Difficult",
+    "description": "A tall, elegant tree with violin-shaped leaves. Needs plenty of filtered light.",
+    "image": "/images/fiddle_leaf_fig.png",
+    "providerName": "EverGreen Gardens"
+  },
+  {
+    "plantId": 4,
+    "plantName": "Peace Lily",
+    "category": "Flowering Plant",
+    "price": 22,
+    "rating": 4.6,
+    "availableStock": 12,
+    "careLevel": "Moderate",
+    "description": "Bears beautiful white flowers and helps neutralize indoor pollutants like benzene.",
+    "image": "/images/peace_lily.png",
+    "providerName": "Floral Aura"
+  },
+  {
+    "plantId": 5,
+    "plantName": "Aloe Vera",
+    "category": "Medicinal / Succulent",
+    "price": 12,
+    "rating": 4.8,
+    "availableStock": 20,
+    "careLevel": "Easy",
+    "description": "A practical and pretty succulent that loves sun. Known for its soothing gel.",
+    "image": "/images/aloe_vera.png",
+    "providerName": "GreenNest Studio"
+  },
+  {
+    "plantId": 6,
+    "plantName": "Golden Pothos",
+    "category": "Hanging Vine",
+    "price": 15,
+    "rating": 4.9,
+    "availableStock": 25,
+    "careLevel": "Very Easy",
+    "description": "A trailing vine that grows rapidly and is incredibly hard to kill. Great for high spots.",
+    "image": "/images/pothos.png",
+    "providerName": "Urban Jungle Co."
+  }
+]
