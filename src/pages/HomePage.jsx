@@ -57,8 +57,10 @@ const HomePage = () => {
     </div>
   </SwiperSlide>
 </Swiper>
+    {/* json data
+          */}
 
-          </MyContainer>
+       </MyContainer>
         </div>
     );
 };

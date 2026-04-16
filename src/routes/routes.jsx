@@ -6,12 +6,14 @@ import MyProfile from "../pages/MyProfile";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import PrivateRouter from "../privaterouter/PrivateRouter";
+import ErrorPage from "../pages/ErrorPage";
 
 
 export const router=createBrowserRouter([
     {
         path:'/',
         element:<MainLayout/>,
+        errorElement:<ErrorPage/>,
         children:[
             {
                 index:true,
@@ -34,5 +36,7 @@ export const router=createBrowserRouter([
                 element:<Login></Login>
             },
         ]
-    }
+       
+    },
+     
 ])
